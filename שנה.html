@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>השנה שלי · חיים צ׳רנין</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--green:#00965a;--red:#e0245e;--ink:#0f1419;--muted:#536471;--faint:#8b98a5;--line:#eff3f4;--soft:#f2f4f5;--border:#cfd9de;--yellow:#FFD84D}
+  *{box-sizing:border-box}
+  body{margin:0;background:#fff;color:var(--ink);font:16px/1.55 'Heebo',-apple-system,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:900px;margin:0 auto;padding:40px 24px 60px}
+  header{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+  h1{font-size:32px;font-weight:800;margin:0;letter-spacing:-.015em}
+  .sub{color:var(--muted);font-size:15px;margin-top:4px}
+  a.btn{font-size:14px;font-weight:700;border:1px solid var(--border);border-radius:999px;padding:8px 18px;color:var(--ink);text-decoration:none}
+  a.btn:hover{background:var(--soft)}
+  select{font:inherit;font-size:14px;border:1px solid var(--border);border-radius:999px;padding:4px 12px;background:#fff}
+  .big{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px 0 12px}
+  .box{background:var(--soft);border-radius:20px;padding:18px 20px}
+  .box.dark{background:var(--ink);color:#fff}
+  .box .k{font-size:14px;font-weight:700}
+  .box .v{font-size:30px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.2}
+  .box .s{font-size:13px;color:var(--muted);margin-top:2px}
+  .box.dark .s{color:#c4cdd3}
+  .panel{border:1px solid var(--line);border-radius:20px;padding:20px 22px;margin-top:16px}
+  .panel h2{font-size:19px;font-weight:800;margin:0 0 4px}
+  .hint{color:var(--muted);font-size:14px;margin:0}
+  .legend{display:flex;gap:16px;font-size:13px;color:var(--muted);margin:10px 0 0}
+  .legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-left:6px;vertical-align:-1px}
+  .chart{display:grid;grid-template-columns:repeat(12,1fr);gap:8px;align-items:end;height:220px;margin-top:18px;border-bottom:1px solid var(--border)}
+  .col{display:flex;gap:3px;align-items:flex-end;justify-content:center;height:100%;position:relative}
+  .b{width:42%;border-radius:6px 6px 0 0;min-height:2px}
+  .b.inc{background:var(--green)}
+  .b.exp{background:var(--red)}
+  .b.fc{background:transparent;border:2px dashed var(--border);border-bottom:0}
+  .b.fc.inc{border-color:#7fcaa6}
+  .b.fc.exp{border-color:#f08aa7}
+  .b.none{background:var(--line)}
+  .mlabels{display:grid;grid-template-columns:repeat(12,1fr);gap:8px;margin-top:6px;font-size:12px;color:var(--faint);text-align:center}
+  table{width:100%;border-collapse:collapse;margin-top:12px;font-variant-numeric:tabular-nums}
+  th{font-size:13px;color:var(--faint);font-weight:500;text-align:right;padding:8px;border-bottom:1px solid var(--line)}
+  td{padding:9px 8px;border-bottom:1px solid var(--line)}
+  td.n,th.n{text-align:left}
+  tr.fc td{color:var(--muted)}
+  tr.fc td:first-child::after{content:" · צפי";font-size:12px;color:var(--faint)}
+  tr.none td{color:var(--faint)}
+  tr.tot td{font-weight:800;border-top:2px solid var(--ink);border-bottom:0}
+  .model{margin-top:14px;font-size:13px;color:var(--muted);background:var(--soft);border-radius:12px;padding:10px 14px}
+  .credit{margin-top:44px;padding-top:18px;border-top:2px solid var(--ink);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+  .who{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+  .who .av{width:36px;height:36px;border-radius:50%;background:var(--soft) url('avatar.jpg') center/cover}
+  .who .nm{font-weight:800;line-height:1.1}
+  .who .hd{color:var(--muted);font-size:14px;direction:ltr;text-align:right}
+  .by{font-size:13px;color:var(--muted)}
+  .by a{display:block;font-size:18px;font-weight:800;color:var(--ink);text-decoration:none;direction:ltr;text-align:left}
+  @media (max-width:700px){
+    .wrap{padding:28px 16px 48px}
+    h1{font-size:26px}
+    .big{grid-template-columns:1fr}
+    .chart{gap:3px;height:160px}
+    .mlabels{gap:3px;font-size:10px}
+    .panel{padding:16px 14px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>השנה שלי</h1>
+      <div class="sub"><span id="biz"></span>כמה נכנס, כמה יצא, ולאן השנה הולכת · <select id="year"></select></div>
+    </div>
+    <a class="btn" href="/">חזרה לרואה החשבון</a>
+  </header>
+
+  <div class="big" id="big"></div>
+
+  <section class="panel">
+    <h2>חודש אחרי חודש</h2>
+    <p class="hint" id="cover"></p>
+    <div class="legend"><span><i style="background:var(--green)"></i>נכנס (הכנסות)</span><span><i style="background:var(--red)"></i>יצא (הוצאות)</span><span><i style="border:2px dashed #9aa5ad"></i>צפי</span></div>
+    <div class="chart" id="chart"></div>
+    <div class="mlabels" id="mlabels"></div>
+    <table>
+      <thead><tr><th>חודש</th><th class="n">הכנסות</th><th class="n">הוצאות</th><th class="n">רווח</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <div class="model" id="model"></div>
+  </section>
+
+  <footer class="credit">
+    <a class="who" href="https://instagram.com/haimchernin" target="_blank" rel="noopener"><div class="av"></div><div><div class="nm">חיים צ׳רנין</div><div class="hd">@haimchernin</div></div></a>
+    <div class="by">בחסות<a href="https://uniqstudio.net" target="_blank" rel="noopener">uniqstudio.net</a></div>
+  </footer>
+</div>
+
+<script>
+/* מודל קטן ופתוח: מה שיש = מהתקופות שנסגרו. צפי = ממוצע חודשי של מה שיש, לכל חודש שעוד לא הגיע.
+   רוצים מודל אחר? משנים רק את הפונקציה forecast() למטה. */
+(async function(){
+  const $ = s => document.querySelector(s);
+  const money = n => '₪' + Math.round(n).toLocaleString('he-IL');
+  const NAMES = ['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
+  const SHORT = ['ינו׳','פבר׳','מרץ','אפר׳','מאי','יוני','יולי','אוג׳','ספט׳','אוק׳','נוב׳','דצמ׳'];
+
+  const r = await fetch('/year', {cache:'no-store'}).catch(() => null);
+  if(!r){ document.body.innerHTML = '<p style="padding:40px">המסך עובד דרך Claude: python3 serve.py</p>'; return; }
+  const Y = await r.json();
+  $('#biz').textContent = Y.business ? Y.business + ' · ' : '';
+
+  // months that a closed period covers (from its range), per year
+  const covered = {};
+  const months = {};                                 // 'YYYY-MM' -> {inc, exp}
+  Y.periods.forEach(p => {
+    if(p.range){
+      let [y, m] = p.range[0].slice(0, 7).split('-').map(Number);
+      const end = p.range[1].slice(0, 7);
+      while(`${y}-${String(m).padStart(2, '0')}` <= end){ (covered[y] = covered[y] || new Set()).add(m); m++; if(m > 12){ m = 1; y++; } }
+    }
+    p.income.forEach(i => { const k = i.date.slice(0, 7); (months[k] = months[k] || {inc:0, exp:0}).inc += i.net; });
+    p.expenses.forEach(e => { const k = e.date.slice(0, 7); (months[k] = months[k] || {inc:0, exp:0}).exp += e.amount; });
+  });
+  const years = Object.keys(covered).map(Number).sort();
+  if(!years.length){ $('#cover').textContent = 'עוד אין תקופות סגורות. אחרי הדוח הראשון לרואה החשבון, השנה מתחילה להתמלא.'; return; }
+  const today = new Date();
+  $('#year').innerHTML = years.map(y => `<option ${y === years[years.length - 1] ? 'selected' : ''}>${y}</option>`).join('');
+  $('#year').onchange = () => draw(Number($('#year').value));
+  draw(years[years.length - 1]);
+
+  function forecast(actual){                         // ← the whole model: average of the months we have
+    const n = actual.length || 1;
+    return {inc: actual.reduce((a, x) => a + x.inc, 0) / n, exp: actual.reduce((a, x) => a + x.exp, 0) / n};
+  }
+
+  function draw(year){
+    const have = covered[year] || new Set();
+    const lastHave = Math.max(...have);
+    const rows = NAMES.map((name, i) => {
+      const m = i + 1, k = `${year}-${String(m).padStart(2, '0')}`;
+      if(have.has(m)) return {m, name, kind:'actual', ...(months[k] || {inc:0, exp:0})};
+      return {m, name, kind: m > lastHave ? 'fc' : 'none', inc:0, exp:0};
+    });
+    const actual = rows.filter(x => x.kind === 'actual');
+    const avg = forecast(actual);
+    rows.forEach(x => { if(x.kind === 'fc'){ x.inc = avg.inc; x.exp = avg.exp; } });
+
+    const sumOf = (list, f) => list.reduce((a, x) => a + f(x), 0);
+    const counted = rows.filter(x => x.kind !== 'none');
+    const incAct = sumOf(actual, x => x.inc), expAct = sumOf(actual, x => x.exp);
+    const incEnd = sumOf(counted, x => x.inc), expEnd = sumOf(counted, x => x.exp);
+    const fcN = rows.filter(x => x.kind === 'fc').length;
+
+    $('#big').innerHTML = `
+      <div class="box"><div class="k">נכנס עד עכשיו</div><div class="v">${money(incAct)}</div><div class="s">לפני מע"מ · ${actual.length} חודשים</div></div>
+      <div class="box"><div class="k">יצא עד עכשיו</div><div class="v">${money(expAct)}</div><div class="s">הוצאות של העסק</div></div>
+      <div class="box dark"><div class="k">רווח צפוי לסוף ${year}</div><div class="v">${money(incEnd - expEnd)}</div><div class="s">${fcN ? `כולל צפי ל־${fcN} חודשים שנשארו` : 'השנה סגורה'}</div></div>`;
+
+    const first = Math.min(...have);
+    $('#cover').textContent = `יש נתונים מ${NAMES[first - 1]} עד ${NAMES[lastHave - 1]}.` + (first > 1 ? ` מה שלפני ${NAMES[first - 1]} לא במערכת, ולכן לא נספר.` : '');
+
+    const max = Math.max(1, ...rows.map(x => Math.max(x.inc, x.exp)));
+    const h = v => Math.max(1.5, v / max * 100).toFixed(1) + '%';
+    $('#chart').innerHTML = rows.map(x => x.kind === 'none'
+      ? `<div class="col" title="${x.name}: אין נתונים"><div class="b none" style="height:2%"></div><div class="b none" style="height:2%"></div></div>`
+      : `<div class="col" title="${x.name}: הכנסות ${money(x.inc)} · הוצאות ${money(x.exp)}${x.kind === 'fc' ? ' (צפי)' : ''}">
+           <div class="b inc ${x.kind === 'fc' ? 'fc' : ''}" style="height:${h(x.inc)}"></div>
+           <div class="b exp ${x.kind === 'fc' ? 'fc' : ''}" style="height:${h(x.exp)}"></div></div>`).join('');
+    $('#mlabels').innerHTML = SHORT.map(s => `<span>${s}</span>`).join('');
+    $('#rows').innerHTML = rows.filter(x => x.kind !== 'none').map(x => `<tr class="${x.kind === 'actual' ? '' : x.kind}">
+        <td>${x.name}</td>
+        <td class="n">${x.kind === 'none' ? '—' : money(x.inc)}</td>
+        <td class="n">${x.kind === 'none' ? '—' : money(x.exp)}</td>
+        <td class="n">${x.kind === 'none' ? '—' : money(x.inc - x.exp)}</td></tr>`).join('')
+      + `<tr class="tot"><td>סה"כ ${year}</td><td class="n">${money(incEnd)}</td><td class="n">${money(expEnd)}</td><td class="n">${money(incEnd - expEnd)}</td></tr>`;
+    $('#model').textContent = `איך מחושב הצפי: ממוצע של ${actual.length} החודשים שיש (${money(avg.inc)} הכנסות ו־${money(avg.exp)} הוצאות בחודש), לכל חודש שעוד לא נסגר. `
+      + 'זה מודל פשוט ופתוח: אפשר לשנות אותו בקובץ שנה.html, בפונקציה forecast.';
+  }
+})();
+</script>
+</body>
+</html>
